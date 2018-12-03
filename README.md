@@ -23,4 +23,48 @@ Add the dependency to your POM:
 
 ## Usage
 
-TODO
+```
+public class MyApplication extends Application<MyConfiguration> {
+
+  @Inject private SomethingINeed somethingINeed;
+
+  @Override
+  public void initialize(final Bootstrap<MyConfiguration> bootstrap) {
+    bootstrap.addBundle(
+      new GuiceBundle<MyConfiguration>(
+        this,
+        new MyApplicationModule(),
+        new MyOtherApplicationModule()
+      )
+    );
+  }
+
+  @Override
+  public void run(final MyConfiguration configuration, final Environment environment) {
+    somethingINeed.canNowBeUsed();
+  }
+}
+```
+ 
+You now have access to some Guice idiomatic bind points in your `Module`s: 
+
+- Multibindings to `WebResource` provide resources.
+- Multibindings to `HealthCheck` provide healthchecks.
+- Multibindings to `Managed` provide controlled startup and shutdown of components.
+- Multibindings to `Service` provide controlled startup and shutdown of background processes.
+- Multibindings to `EnvironmentInitialiser` allow you to hook into the `Application.run` phase directly from anywhere in your code when you need to do anything else on startup. 
+
+All of these can inject as normal, and all except `WebResource` can be package private, aiding encapsulation (unfortunately, JAX-WS prevents this for JAX-RS resources).
+
+The following are provided by default for injection:
+
+- Your application configuration
+- The `Environment`
+- The `HttpServletRequest` and `HttpServletResponse` during web requests (thanks to `GuiceFilter`).
+
+In addition, any `Module` provided directly to `GuiceBundle` can support the `Configured` interface to gain access to the application configuration during bind time.
+
+## Examples
+
+See the test tree for some basic examples.
+
