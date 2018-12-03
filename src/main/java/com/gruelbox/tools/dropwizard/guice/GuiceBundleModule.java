@@ -18,7 +18,7 @@ class GuiceBundleModule extends AbstractModule {
 
   private final Environment environment;
 
-  public GuiceBundleModule(Environment environment) {
+  GuiceBundleModule(Environment environment) {
     this.environment = environment;
   }
 

@@ -3,6 +3,8 @@ package com.gruelbox.tools.dropwizard.guice;
 import java.util.Arrays;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,7 +56,7 @@ import io.dropwizard.setup.Environment;
  *
  * <p>
  * You now have access to some Guice idiomatic bind points in your
- * {@link Module}s
+ * {@link Module}s:
  * </p>
  *
  * <ul>
@@ -81,10 +83,34 @@ public class GuiceBundle<T> implements ConfiguredBundle<T> {
   private final Iterable<Module> modules;
   private final Application<?> application;
 
+  /**
+   * Creates the bundle.
+   *
+   * @param application The {@link Application} itself. Any fields or methods
+   *                    annotated with {@link Inject} will be populated at the
+   *                    start of the
+   *                    {@link Application#run(io.dropwizard.Configuration, Environment)}
+   *                    phase, prior to the {@code Application}'s own {@code run}}
+   *                    method.
+   * @param modules     Guice modules to include when creating the injector
+   *                    itself, which will occur in the run phase.
+   */
   public GuiceBundle(Application<?> application, Module...modules) {
     this(application, Arrays.asList(modules));
   }
 
+  /**
+   * Creates the bundle.
+   *
+   * @param application The {@link Application} itself. Any fields or methods
+   *                    annotated with {@link Inject} will be populated at the
+   *                    start of the
+   *                    {@link Application#run(io.dropwizard.Configuration, Environment)}
+   *                    phase, prior to the {@code Application}'s own {@code run}}
+   *                    method.
+   * @param modules     Guice modules to include when creating the injector
+   *                    itself, which will occur in the run phase.
+   */
   public GuiceBundle(Application<?> application, Iterable<Module> modules) {
     this.application = application;
     this.modules = modules;
