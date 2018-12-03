@@ -13,7 +13,6 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.util.concurrent.Service;
-import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
@@ -143,23 +142,14 @@ public class GuiceBundle<T> implements ConfiguredBundle<T> {
   }
 
   private Injector createInjector(T configuration, Environment environment) {
-    final Injector injector = Guice.createInjector(
+    return Guice.createInjector(
       Iterables.concat(
-        modules,
-        ImmutableList.of(
-          new GuiceBundleModule(environment),
-          new Module() {
-            @Override
-            public void configure(Binder binder) {
-              @SuppressWarnings("unchecked")
-              Class<T> clazz = (Class<T>) configuration.getClass();
-              binder.bind(clazz).toInstance(configuration);
-            }
-          }
+          modules,
+          ImmutableList.of(
+            new GuiceBundleModule<>(environment, configuration)
+          )
         )
-      )
-    );
-    return injector;
+      );
   }
 
   @SuppressWarnings("unchecked")

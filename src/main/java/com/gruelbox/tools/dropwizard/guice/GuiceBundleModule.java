@@ -14,18 +14,26 @@ import io.dropwizard.setup.Environment;
  *
  * @author Graham Crockford
  */
-class GuiceBundleModule extends AbstractModule {
+class GuiceBundleModule<T> extends AbstractModule {
 
   private final Environment environment;
+  private final T configuration;
 
-  GuiceBundleModule(Environment environment) {
+  GuiceBundleModule(Environment environment, T configuration) {
     this.environment = environment;
+    this.configuration = configuration;
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   protected void configure() {
+
+    bind((Class<T>)configuration.getClass()).toInstance(configuration);
     bind(Environment.class).toInstance(environment);
+
     Multibinder.newSetBinder(binder(), EnvironmentInitialiser.class);
+
+
     install(new GuiceHealthCheckModule());
     install(new GuiceManagedModule());
     install(new GuiceResourcesModule());
