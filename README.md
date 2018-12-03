@@ -66,5 +66,5 @@ In addition, any `Module` provided directly to `GuiceBundle` can support the `Co
 
 ## Examples
 
-See the test tree for some basic examples.
+See the [tests](https://github.com/gruelbox/dropwizard-guice-box/tree/master/src/test/java/com/gruelbox/tools/dropwizard/guice/example/simple) for some basic examples.
 
