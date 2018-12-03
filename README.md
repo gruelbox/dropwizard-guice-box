@@ -17,7 +17,7 @@ Add the dependency to your POM:
 <dependency>
   <groupId>com.gruelbox</groupId>
   <artifactId>dropwizard-guice-box</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
 </dependency>
 ```
 
