@@ -68,3 +68,6 @@ In addition, any `Module` provided directly to `GuiceBundle` can support the `Co
 
 See the [tests](https://github.com/gruelbox/dropwizard-guice-box/tree/master/src/test/java/com/gruelbox/tools/dropwizard/guice/example/simple) for some basic examples.
 
+## Credit
+
+The POM and Travis build borrow heavily from other projects. See [oss-archetype](https://github.com/gruelbox/oss-archetype#credit) for credits.
