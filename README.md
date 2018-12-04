@@ -5,6 +5,8 @@
 [![Sonarcloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box)
 [![Sonarcloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box&metric=coverage)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box)
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box)
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.gruelbox/dropwizard-guice-box/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.gruelbox/dropwizard-guice-box)
 [![Javadocs](https://www.javadoc.io/badge/com.gruelbox/dropwizard-guice-box.svg?color=blue)](https://www.javadoc.io/doc/com.gruelbox/dropwizard-guice-box)
 
 A slightly different take on Guice integration with DropWizard, which makes heavy use of multibindings to create a more plugin-like, modular experience.
