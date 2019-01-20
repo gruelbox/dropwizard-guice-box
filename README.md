@@ -93,14 +93,11 @@ public class MyApplication extends Application<MyConfiguration> {
   
     super.initialize(bootstrap);
     
-    HibernateBundleFactory<ExampleConfiguration> hibernateBundleFactory = new HibernateBundleFactory<>(configuration -> {
+    HibernateBundleFactory<MyConfiguration> hibernateBundleFactory = new HibernateBundleFactory<>(configuration -> {
       DataSourceFactory dsf = new DataSourceFactory();
-      dsf.setDriverClass("org.h2.Driver");
-      dsf.setUrl("jdbc:h2:mem:test");
-      dsf.setProperties(ImmutableMap.of(
-        "charset", "UTF-8",
-        "hibernate.dialect", H2Dialect.class.getName()
-      ));
+      dsf.setDriverClass(configuration.getDriverClass());
+      dsf.setUrl(configuration.getJdbcUrl());
+      // etc...
       return dsf;
     });
     
