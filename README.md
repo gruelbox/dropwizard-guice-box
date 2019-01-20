@@ -19,7 +19,7 @@ Add the dependency to your POM:
 <dependency>
   <groupId>com.gruelbox</groupId>
   <artifactId>dropwizard-guice-box</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
 </dependency>
 ```
 
@@ -32,6 +32,7 @@ public class MyApplication extends Application<MyConfiguration> {
 
   @Override
   public void initialize(final Bootstrap<MyConfiguration> bootstrap) {
+    super.initialize(bootstrap);
     bootstrap.addBundle(
       new GuiceBundle<MyConfiguration>(
         this,
@@ -65,6 +66,93 @@ The following are provided by default for injection:
 - The `HttpServletRequest` and `HttpServletResponse` during web requests (thanks to `GuiceFilter`).
 
 In addition, any `Module` provided directly to `GuiceBundle` can support the `Configured` interface to gain access to the application configuration during bind time.
+
+## Hibernate
+
+If you're using Dropwizard's Hibernate bundle, you can provide your `@Entity` classes via injection too, which is great for keeping underlying database structure encapsulated in your modules.
+
+Add the dependency:
+
+```
+<dependency>
+  <groupId>com.gruelbox</groupId>
+  <artifactId>dropwizard-guice-box</artifactId>
+  <version>0.0.2</version>
+</dependency>
+```
+
+And modify your code to construct and install the `HibernateBundle`, replacing the example `DataSourceFactory` configuration in the example with your requirements:
+
+```
+public class MyApplication extends Application<MyConfiguration> {
+
+  @Inject private SomethingINeed somethingINeed;
+
+  @Override
+  public void initialize(final Bootstrap<MyConfiguration> bootstrap) {
+  
+    super.initialize(bootstrap);
+    
+    HibernateBundleFactory<ExampleConfiguration> hibernateBundleFactory = new HibernateBundleFactory<>(configuration -> {
+      DataSourceFactory dsf = new DataSourceFactory();
+      dsf.setDriverClass("org.h2.Driver");
+      dsf.setUrl("jdbc:h2:mem:test");
+      dsf.setProperties(ImmutableMap.of(
+        "charset", "UTF-8",
+        "hibernate.dialect", H2Dialect.class.getName()
+      ));
+      return dsf;
+    });
+    
+    bootstrap.addBundle(
+      new GuiceBundle<MyConfiguration>(
+        this,
+        new MyApplicationModule(),
+        new MyOtherApplicationModule(),
+        new GuiceHibernateModule(hibernateBundleFactory)
+      )
+    );
+    
+    bootstrap.addBundle(hibernateBundleFactory.bundle());
+  }
+
+  @Override
+  public void run(final MyConfiguration configuration, final Environment environment) {
+    somethingINeed.canNowBeUsed();
+  }
+  
+      LOGGER.info("Initialising");
+    super.initialize(bootstrap);
+
+    HibernateBundleFactory<ExampleConfiguration> hibernateBundleFactory = new HibernateBundleFactory<>(configuration -> {
+        DataSourceFactory dsf = new DataSourceFactory();
+        dsf.setDriverClass("org.h2.Driver");
+        dsf.setUrl("jdbc:h2:mem:test");
+        dsf.setProperties(ImmutableMap.of(
+            "charset", "UTF-8",
+            "hibernate.dialect", H2Dialect.class.getName(),
+            AvailableSettings.LOG_SESSION_METRICS, "false"
+        ));
+        dsf.setMaxWaitForConnection(Duration.seconds(1));
+        dsf.setValidationQuery("/* Health Check */ SELECT 1");
+        dsf.setMinSize(1);
+        dsf.setMaxSize(4);
+        dsf.setCheckConnectionWhileIdle(false);
+        return dsf;
+      });
+
+    bootstrap.addBundle(
+      new GuiceBundle<ExampleConfiguration>(
+        this,
+        new GuiceHibernateModule(hibernateBundleFactory)
+      )
+    );
+
+    bootstrap.addBundle(hibernateBundleFactory.bundle());
+}
+```
+
+You now have access to both `SessionFactory` and `HibernateBundle` via injection, and can multi-bind implementations of `EntityContribution` to provide JPA entities at runtime.
 
 ## Examples
 
