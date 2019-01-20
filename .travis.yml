@@ -38,6 +38,7 @@ matrix:
   fast_finish: true
   include:
     - jdk: oraclejdk8
+    - jdk: openjdk11
 cache:
   directories:
     - '$HOME/.m2/repository'
