@@ -120,35 +120,6 @@ public class MyApplication extends Application<MyConfiguration> {
   public void run(final MyConfiguration configuration, final Environment environment) {
     somethingINeed.canNowBeUsed();
   }
-  
-      LOGGER.info("Initialising");
-    super.initialize(bootstrap);
-
-    HibernateBundleFactory<ExampleConfiguration> hibernateBundleFactory = new HibernateBundleFactory<>(configuration -> {
-        DataSourceFactory dsf = new DataSourceFactory();
-        dsf.setDriverClass("org.h2.Driver");
-        dsf.setUrl("jdbc:h2:mem:test");
-        dsf.setProperties(ImmutableMap.of(
-            "charset", "UTF-8",
-            "hibernate.dialect", H2Dialect.class.getName(),
-            AvailableSettings.LOG_SESSION_METRICS, "false"
-        ));
-        dsf.setMaxWaitForConnection(Duration.seconds(1));
-        dsf.setValidationQuery("/* Health Check */ SELECT 1");
-        dsf.setMinSize(1);
-        dsf.setMaxSize(4);
-        dsf.setCheckConnectionWhileIdle(false);
-        return dsf;
-      });
-
-    bootstrap.addBundle(
-      new GuiceBundle<ExampleConfiguration>(
-        this,
-        new GuiceHibernateModule(hibernateBundleFactory)
-      )
-    );
-
-    bootstrap.addBundle(hibernateBundleFactory.bundle());
 }
 ```
 
