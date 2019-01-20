@@ -76,7 +76,7 @@ Add the dependency:
 ```
 <dependency>
   <groupId>com.gruelbox</groupId>
-  <artifactId>dropwizard-guice-box</artifactId>
+  <artifactId>dropwizard-guice-box-hibernate</artifactId>
   <version>0.0.2</version>
 </dependency>
 ```
@@ -152,7 +152,7 @@ public class MyApplication extends Application<MyConfiguration> {
 }
 ```
 
-You now have access to both `SessionFactory` and `HibernateBundle` via injection, and can multi-bind implementations of `EntityContribution` to provide JPA entities at runtime.
+You now have access to both `SessionFactory` and `HibernateBundle` via injection, and can multi-bind implementations of `EntityContribution` to provide JPA entities at runtime, as you would with `WebResource`, `Healthcheck` etc.
 
 ## Examples
 
