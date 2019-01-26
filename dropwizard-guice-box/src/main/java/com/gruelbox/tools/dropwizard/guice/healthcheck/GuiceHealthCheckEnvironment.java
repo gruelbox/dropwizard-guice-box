@@ -21,7 +21,7 @@ class GuiceHealthCheckEnvironment implements EnvironmentInitialiser {
   @Override
   public void init(Environment environment) {
     healthChecks.stream()
-      .peek(t -> LOGGER.info("Registering health check {}", t))
+      .peek(t -> LOGGER.debug("Registering health check {}", t))
       .forEach(t -> environment.healthChecks().register(t.getClass().getSimpleName(), t));
   }
 }

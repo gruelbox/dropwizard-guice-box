@@ -20,7 +20,7 @@ class GuiceResourcesEnvironment implements EnvironmentInitialiser {
   @Override
   public void init(Environment environment) {
     webResources.stream()
-      .peek(t -> LOGGER.info("Registering resource {}", t))
+      .peek(t -> LOGGER.debug("Registering resource {}", t))
       .forEach(environment.jersey()::register);
   }
 }

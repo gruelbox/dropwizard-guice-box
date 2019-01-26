@@ -21,7 +21,7 @@ class GuiceManagedEnvironment implements EnvironmentInitialiser {
   @Override
   public void init(Environment environment) {
     managedTasks.stream()
-      .peek(t -> LOGGER.info("Starting managed task {}", t))
+      .peek(t -> LOGGER.debug("Starting managed task {}", t))
       .forEach(environment.lifecycle()::manage);
   }
 }
