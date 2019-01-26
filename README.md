@@ -1,10 +1,10 @@
 # dropwizard-guice-box
 
 [![Build Status](https://travis-ci.org/gruelbox/dropwizard-guice-box.svg?branch=master)](https://travis-ci.org/gruelbox/dropwizard-guice-box)
-[![Sonarcloud Security Rating](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box&metric=security_rating)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box)
-[![Sonarcloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box)
-[![Sonarcloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box&metric=coverage)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box)
+[![Sonarcloud Security Rating](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box-parent&metric=security_rating)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box-parent)
+[![Sonarcloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box-parent&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box-parent)
+[![Sonarcloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box-parent&metric=coverage)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box-parent)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box-parent&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box-parent)
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.gruelbox/dropwizard-guice-box/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.gruelbox/dropwizard-guice-box)
 [![Javadocs](https://www.javadoc.io/badge/com.gruelbox/dropwizard-guice-box.svg?color=blue)](https://www.javadoc.io/doc/com.gruelbox/dropwizard-guice-box)
