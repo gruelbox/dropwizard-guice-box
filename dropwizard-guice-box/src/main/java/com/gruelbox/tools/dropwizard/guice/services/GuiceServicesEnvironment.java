@@ -21,7 +21,7 @@ class GuiceServicesEnvironment implements EnvironmentInitialiser {
   @Override
   public void init(Environment environment) {
     services.stream()
-      .peek(t -> LOGGER.info("Starting service {}", t))
+      .peek(t -> LOGGER.debug("Starting service {}", t))
       .map(ManagedServiceTask::new)
       .forEach(environment.lifecycle()::manage);
   }
