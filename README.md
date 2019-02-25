@@ -124,7 +124,7 @@ You now have access to both `SessionFactory` and `HibernateBundle` via injection
 
 ## Examples
 
-See the [tests](https://github.com/gruelbox/dropwizard-guice-box/tree/master/src/test/java/com/gruelbox/tools/dropwizard/guice/example/simple) for some basic examples.
+See the [tests](https://github.com/gruelbox/dropwizard-guice-box/tree/master/dropwizard-guice-box/src/test/java/com/gruelbox/tools/dropwizard/guice/example/simple) for some basic examples.
 
 ## Credit
 
