@@ -32,7 +32,7 @@ jobs:
       name: "Test (JDK8)"
       jdk: oraclejdk8
       script: mvn clean test -B -U
-    - if: (repo = gruelbox/dropwizard-guice-box AND NOT head_repo = gruelbox/dropwizard-guice-box AND type = pull_request) OR NOT repo = gruelbox/dropwizard-guice-box 
+    - if: (repo = gruelbox/dropwizard-guice-box AND NOT head_repo = gruelbox/dropwizard-guice-box AND type = pull_request) OR NOT repo = gruelbox/dropwizard-guice-box
       name: "Test (JDK11)"
       jdk: openjdk11
       script: mvn clean test -B -U
