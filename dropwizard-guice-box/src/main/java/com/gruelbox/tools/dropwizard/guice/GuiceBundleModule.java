@@ -20,7 +20,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.Multibinder;
 import com.gruelbox.tools.dropwizard.guice.healthcheck.GuiceHealthCheckModule;
 import com.gruelbox.tools.dropwizard.guice.managed.GuiceManagedModule;
-import com.gruelbox.tools.dropwizard.guice.resources.GuiceResourcesModule;
+import com.gruelbox.tools.dropwizard.guice.resources.GuiceJerseyModule;
 import com.gruelbox.tools.dropwizard.guice.services.GuiceServicesModule;
 
 import io.dropwizard.setup.Environment;
@@ -51,7 +51,7 @@ class GuiceBundleModule<T> extends AbstractModule {
 
     install(new GuiceHealthCheckModule());
     install(new GuiceManagedModule());
-    install(new GuiceResourcesModule());
+    install(new GuiceJerseyModule());
     install(new GuiceServicesModule());
   }
 }

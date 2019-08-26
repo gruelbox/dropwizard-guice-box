@@ -18,6 +18,7 @@ package com.gruelbox.tools.dropwizard.guice.example.simple;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import javax.ws.rs.ext.ExceptionMapper;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
@@ -32,6 +33,8 @@ final class ExampleApplicationSimpleModule extends AbstractModule {
     install(new Submodule());
     Multibinder.newSetBinder(binder(), WebResource.class)
       .addBinding().to(ExampleResource.class);
+    Multibinder.newSetBinder(binder(), ExceptionMapper.class)
+      .addBinding().to(ExampleExceptionMapper.class);
   }
 
   @Provides

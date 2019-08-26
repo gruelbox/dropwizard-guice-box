@@ -58,4 +58,12 @@ public final class ExampleResource implements WebResource {
   public String configProperty() {
     return configuration.getProperty1();
   }
+
+  @GET
+  @Timed
+  @Path("/unsupported")
+  @Produces(MediaType.TEXT_PLAIN)
+  public String unsupported() {
+    throw new UnsupportedOperationException();
+  }
 }

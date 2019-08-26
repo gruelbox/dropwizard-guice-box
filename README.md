@@ -53,9 +53,10 @@ You now have access to some Guice idiomatic bind points in your `Module`s:
 
 - Multibindings to `WebResource` provide resources.
 - Multibindings to `HealthCheck` provide healthchecks.
+- Multibindings to `ExceptionMapper` allow you to map exceptions from your endpoints to HTTP responses.
 - Multibindings to `Managed` provide controlled startup and shutdown of components.
 - Multibindings to `Service` provide controlled startup and shutdown of background processes.
-- Multibindings to `EnvironmentInitialiser` allow you to hook into the `Application.run` phase directly from anywhere in your code when you need to do anything else on startup. 
+- Multibindings to `EnvironmentInitialiser` allow you to hook into the `Application.run` phase directly from anywhere in your code when you need to do anything else on startup, without having to add code to `Application.run` directly.
 
 All of these can inject as normal, and all except `WebResource` can be package private, aiding encapsulation (unfortunately, JAX-WS prevents this for JAX-RS resources).
 

@@ -16,15 +16,32 @@
  */
 package com.gruelbox.tools.dropwizard.guice.resources;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.multibindings.Multibinder;
+import java.util.Set;
+
+import javax.inject.Inject;
+import javax.ws.rs.ext.ExceptionMapper;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.common.collect.Streams;
 import com.gruelbox.tools.dropwizard.guice.EnvironmentInitialiser;
 
-public class GuiceResourcesModule extends AbstractModule {
+import io.dropwizard.setup.Environment;
+
+class GuiceJerseyEnvironment implements EnvironmentInitialiser {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(GuiceJerseyEnvironment.class);
+
+  @Inject private Set<WebResource> webResources;
+
+  @SuppressWarnings("rawtypes")
+  @Inject private Set<ExceptionMapper> exceptionMappers;
+
   @Override
-  protected void configure() {
-    Multibinder.newSetBinder(binder(), WebResource.class);
-    Multibinder.newSetBinder(binder(), EnvironmentInitialiser.class)
-      .addBinding().to(GuiceResourcesEnvironment.class);
+  public void init(Environment environment) {
+    Streams.concat(webResources.stream(), exceptionMappers.stream())
+      .peek(t -> LOGGER.debug("Registering resource {}", t))
+      .forEach(environment.jersey()::register);
   }
 }

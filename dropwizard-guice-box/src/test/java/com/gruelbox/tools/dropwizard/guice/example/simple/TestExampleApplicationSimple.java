@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -63,5 +64,19 @@ public class TestExampleApplicationSimple {
         String.format("http://localhost:%d/example/configProperty", RULE.getLocalPort()))
        .request().get();
     assertEquals("awful", response.getHeaderString("submodule-response"));
+  }
+
+  @Test
+  public void testExceptionMapper() {
+    Client client = new JerseyClientBuilder(RULE.getEnvironment()).build("test client 2");
+
+    assertEquals(
+      Status.FORBIDDEN.getStatusCode(),
+      client.target(
+        String.format("http://localhost:%d/example/unsupported", RULE.getLocalPort()))
+       .request()
+       .get()
+       .getStatus()
+    );
   }
 }
