@@ -140,11 +140,11 @@ public class GuiceBundle<T> implements ConfiguredBundle<T> {
     configureModules(configuration);
     final Injector injector = createInjector(configuration, environment);
     registerRequestFilter(injector, environment);
-    initiaiseEnvironment(injector, environment);
+    initialiseEnvironment(injector, environment);
     injector.injectMembers(application);
   }
 
-  private void initiaiseEnvironment(final Injector injector, Environment environment) {
+  private void initialiseEnvironment(final Injector injector, Environment environment) {
     injector.getInstance(Key.get(setOf(EnvironmentInitialiser.class))).stream()
       .peek(t -> LOGGER.debug("Initialising environment for {}", t))
       .forEach(t -> t.init(environment));
