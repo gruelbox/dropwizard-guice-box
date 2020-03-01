@@ -19,20 +19,27 @@ Add the dependency to your POM:
 <dependency>
   <groupId>com.gruelbox</groupId>
   <artifactId>dropwizard-guice-box</artifactId>
-  <version>0.0.5</version>
+  <version>1.0.0</version>
 </dependency>
 ```
+
+All releases from 1.0.0 onwards are [semantically versioned](https://semver.org/). You can safely take any release incrementing the minor or patch versions without worrying about compatibility.
 
 ## Usage
 
 ```
 public class MyApplication extends Application<MyConfiguration> {
 
+  // Optional - you can inject directly into your Application to get access
+  // to injected assets in the run() method.
   @Inject private SomethingINeed somethingINeed;
 
   @Override
   public void initialize(final Bootstrap<MyConfiguration> bootstrap) {
     super.initialize(bootstrap);
+    
+    // Any modules listed here can implement Configured<MyConfiguration> to get access to the
+    // configuration during the injector build.
     bootstrap.addBundle(
       new GuiceBundle<MyConfiguration>(
         this,
@@ -44,6 +51,9 @@ public class MyApplication extends Application<MyConfiguration> {
 
   @Override
   public void run(final MyConfiguration configuration, final Environment environment) {
+    // You can access injected assets here if you wish, however, multi-binding
+    // an EnvironmentInitialiser is a cleaner way to do this, allowing your code to
+    // be more modular.
     somethingINeed.canNowBeUsed();
   }
 }
@@ -60,13 +70,13 @@ You now have access to some Guice idiomatic bind points in your `Module`s:
 
 All of these can inject as normal, and all except `WebResource` can be package private, aiding encapsulation (unfortunately, JAX-WS prevents this for JAX-RS resources).
 
-The following are provided by default for injection:
+The following are provided by default for injection anywhere:
 
 - Your application configuration
 - The `Environment`
-- The `HttpServletRequest` and `HttpServletResponse` during web requests (thanks to `GuiceFilter`).
+- The `HttpServletRequest` and `HttpServletResponse` during web requests (thanks to `GuiceFilter`), if you install `new ServletModule()` during `Injector` creation.
 
-In addition, any `Module` provided directly to `GuiceBundle` can support the `Configured` interface to gain access to the application configuration during bind time.
+In addition, any `Module` provided directly to `GuiceBundle` can support the `Configured` interface to gain access to the application configuration during bind time. This can be helpful where your configuration drives the choice of bindings.
 
 ## Hibernate
 
