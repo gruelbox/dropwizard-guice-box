@@ -32,7 +32,7 @@
 
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+    <sonar.jacoco.reportPaths>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPaths>
     <sonar.language>java</sonar.language>
   </properties>
 
@@ -138,6 +138,22 @@
   </dependencies>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.2</version>
+          <configuration>
+            <argLine>${surefireArgLine}</argLine>
+            <excludes>
+              <exclude>**/*Integration.java</exclude>
+            </excludes>
+            <useSystemClassLoader>false</useSystemClassLoader>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -223,21 +239,39 @@
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.5</version>
-            <configuration>
-              <destFile>${sonar.jacoco.reportPath}</destFile>
-              <append>true</append>
-            </configuration>
             <executions>
               <execution>
-                <id>agent</id>
+                <id>default-prepare-agent</id>
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
+                <configuration>
+                  <destFile>${sonar.jacoco.reportPaths}</destFile>
+                  <propertyName>surefireArgLine</propertyName>
+                  <append>true</append>
+                </configuration>
+              </execution>
+              <execution>
+                <id>default-report</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                  <dataFile>${sonar.jacoco.reportPaths}</dataFile>
+                </configuration>
               </execution>
             </executions>
           </plugin>
         </plugins>
       </build>
+      <dependencies>
+        <dependency>
+          <groupId>org.sonarsource.java</groupId>
+          <artifactId>sonar-jacoco-listeners</artifactId>
+          <version>5.14.0.18788</version>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
     </profile>
     <profile>
       <id>release</id>
