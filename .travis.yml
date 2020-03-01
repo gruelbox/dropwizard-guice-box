@@ -13,36 +13,30 @@ jobs:
     - if: repo = gruelbox/dropwizard-guice-box AND branch = master AND NOT type = pull_request
       name: "Test & Sonar - master (JDK8)"
       jdk: oraclejdk8
-      script: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test sonar:sonar -Pcoverage-per-test -B -U
-    - if: repo = gruelbox/dropwizard-guice-box AND branch = master AND NOT type = pull_request
-      name: "Test & Sonar - master (JDK11)"
-      jdk: openjdk11
-      script: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test sonar:sonar -Pcoverage-per-test -B -U
+      script:
+        - git fetch --unshallow --quiet
+        - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test sonar:sonar -Pcoverage-per-test -B -U
 
     - if: repo = gruelbox/dropwizard-guice-box AND NOT branch = master AND NOT type = pull_request
       name: "Test & Sonar - branch (JDK8)"
       jdk: oraclejdk8
-      script: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test sonar:sonar -Pcoverage-per-test -B -U -Dsonar.branch.name=$TRAVIS_BRANCH
-    - if: repo = gruelbox/dropwizard-guice-box AND NOT branch = master AND NOT type = pull_request
-      name: "Test & Sonar - branch (JDK11)"
-      jdk: openjdk11
-      script: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test sonar:sonar -Pcoverage-per-test -B -U -Dsonar.branch.name=$TRAVIS_BRANCH
+      script:
+        - git fetch --unshallow --quiet
+        - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test sonar:sonar -Pcoverage-per-test -B -U -Dsonar.branch.name=$TRAVIS_BRANCH
 
     - if: repo = gruelbox/dropwizard-guice-box AND head_repo = gruelbox/dropwizard-guice-box AND type = pull_request
       name: "Test & Sonar - internal pull request (JDK8)"
       jdk: oraclejdk8
-      script: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test sonar:sonar -Pcoverage-per-test -B -U -Dsonar.pullrequest.key=$TRAVIS_PULL_REQUEST -Dsonar.pullrequest.branch=$TRAVIS_PULL_REQUEST_BRANCH -Dsonar.pullrequest.base=$TRAVIS_BRANCH
-    - if: repo = gruelbox/dropwizard-guice-box AND head_repo = gruelbox/dropwizard-guice-box AND type = pull_request
-      name: "Test & Sonar - internal pull request (JDK11)"
-      jdk: openjdk11
-      script: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test sonar:sonar -Pcoverage-per-test -B -U -Dsonar.pullrequest.key=$TRAVIS_PULL_REQUEST -Dsonar.pullrequest.branch=$TRAVIS_PULL_REQUEST_BRANCH -Dsonar.pullrequest.base=$TRAVIS_BRANCH
+      script:
+        - git fetch --unshallow --quiet
+        - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent test sonar:sonar -Pcoverage-per-test -B -U -Dsonar.pullrequest.key=$TRAVIS_PULL_REQUEST -Dsonar.pullrequest.branch=$TRAVIS_PULL_REQUEST_BRANCH -Dsonar.pullrequest.base=$TRAVIS_BRANCH
 
     - if: (repo = gruelbox/dropwizard-guice-box AND NOT head_repo = gruelbox/dropwizard-guice-box AND type = pull_request) OR NOT repo = gruelbox/dropwizard-guice-box 
       name: "Test (JDK8)"
       jdk: oraclejdk8
       script: mvn clean test -B -U
-    - if: (repo = gruelbox/dropwizard-guice-box AND NOT head_repo = gruelbox/dropwizard-guice-box AND type = pull_request) OR NOT repo = gruelbox/dropwizard-guice-box
-      name: "Test (JDK11)"
+      
+    - name: "Test (JDK11)"
       jdk: openjdk11
       script: mvn clean test -B -U
 
