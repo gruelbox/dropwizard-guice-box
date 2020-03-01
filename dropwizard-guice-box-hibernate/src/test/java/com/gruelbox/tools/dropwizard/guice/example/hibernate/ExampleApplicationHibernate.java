@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.ImmutableMap;
 import com.gruelbox.tools.dropwizard.guice.GuiceBundle;
 import com.gruelbox.tools.dropwizard.guice.hibernate.GuiceHibernateModule;
 import com.gruelbox.tools.dropwizard.guice.hibernate.HibernateBundleFactory;
@@ -31,7 +32,6 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.util.Duration;
-import jersey.repackaged.com.google.common.collect.ImmutableMap;
 
 /**
  * Base case. Absolutely minimal configuration to ensure that there are
