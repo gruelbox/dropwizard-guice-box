@@ -41,6 +41,6 @@ public interface EnvironmentInitialiser {
    *
    * @param environment The application {@link Environment}.
    */
-  public void init(Environment environment);
+  void init(Environment environment);
 
 }

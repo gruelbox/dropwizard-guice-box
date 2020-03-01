@@ -33,10 +33,16 @@ class GuiceJerseyEnvironment implements EnvironmentInitialiser {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GuiceJerseyEnvironment.class);
 
-  @Inject private Set<WebResource> webResources;
+  private final Set<WebResource> webResources;
 
   @SuppressWarnings("rawtypes")
-  @Inject private Set<ExceptionMapper> exceptionMappers;
+  private final Set<ExceptionMapper> exceptionMappers;
+
+  @Inject
+  GuiceJerseyEnvironment(Set<WebResource> webResources, Set<ExceptionMapper> exceptionMappers) {
+    this.webResources = webResources;
+    this.exceptionMappers = exceptionMappers;
+  }
 
   @Override
   public void init(Environment environment) {

@@ -32,7 +32,12 @@ class GuiceHealthCheckEnvironment implements EnvironmentInitialiser {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GuiceHealthCheckEnvironment.class);
 
-  @Inject private Set<HealthCheck> healthChecks;
+  private final Set<HealthCheck> healthChecks;
+
+  @Inject
+  GuiceHealthCheckEnvironment(Set<HealthCheck> healthChecks) {
+    this.healthChecks = healthChecks;
+  }
 
   @Override
   public void init(Environment environment) {

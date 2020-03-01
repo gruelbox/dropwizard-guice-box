@@ -54,6 +54,7 @@ import io.dropwizard.setup.Environment;
  * @author Graham Crockford
  * @param <T> The application configuration class.
  */
+@SuppressWarnings("WeakerAccess")
 public interface Configured<T> {
 
   /**

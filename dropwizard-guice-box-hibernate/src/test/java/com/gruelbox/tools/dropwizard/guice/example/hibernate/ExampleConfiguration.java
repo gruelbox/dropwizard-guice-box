@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.dropwizard.Configuration;
 
+@SuppressWarnings("WeakerAccess")
 public class ExampleConfiguration extends Configuration {
 
   @JsonProperty

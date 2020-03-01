@@ -37,6 +37,7 @@ final class ExampleApplicationSimpleModule extends AbstractModule {
       .addBinding().to(ExampleExceptionMapper.class);
   }
 
+  @SuppressWarnings("SameReturnValue")
   @Provides
   @Named("something")
   @Singleton

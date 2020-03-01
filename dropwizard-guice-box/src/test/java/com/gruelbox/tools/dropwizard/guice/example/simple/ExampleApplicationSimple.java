@@ -39,11 +39,13 @@ import io.dropwizard.setup.Environment;
  *
  * @author Graham Crockford
  */
+@SuppressWarnings("WeakerAccess")
 public class ExampleApplicationSimple extends Application<ExampleConfiguration> {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ExampleApplicationSimple.class);
 
   @VisibleForTesting
+  @SuppressWarnings("WeakerAccess")
   static final String APP_NAME = "Simple example";
 
   // Anything bound can be injected to be available at the start of
@@ -61,7 +63,7 @@ public class ExampleApplicationSimple extends Application<ExampleConfiguration> 
     LOGGER.info("Initialising");
     super.initialize(bootstrap);
     bootstrap.addBundle(
-      new GuiceBundle<ExampleConfiguration>(this, new ExampleApplicationSimpleModule())
+      new GuiceBundle<>(this, new ExampleApplicationSimpleModule())
     );
   }
 
@@ -71,7 +73,7 @@ public class ExampleApplicationSimple extends Application<ExampleConfiguration> 
   }
 
   @Override
-  public void run(ExampleConfiguration configuration, Environment environment) throws Exception {
+  public void run(ExampleConfiguration configuration, Environment environment) {
 
     // Use injected resources
     assertEquals("awful", something);

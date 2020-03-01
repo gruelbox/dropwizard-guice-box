@@ -39,11 +39,13 @@ import io.dropwizard.util.Duration;
  *
  * @author Graham Crockford
  */
+@SuppressWarnings("WeakerAccess")
 public class ExampleApplicationHibernate extends Application<ExampleConfiguration> {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ExampleApplicationHibernate.class);
 
   @VisibleForTesting
+  @SuppressWarnings("WeakerAccess")
   static final String APP_NAME = "Base example";
 
   public ExampleApplicationHibernate() {
@@ -73,7 +75,7 @@ public class ExampleApplicationHibernate extends Application<ExampleConfiguratio
       });
 
     bootstrap.addBundle(
-      new GuiceBundle<ExampleConfiguration>(
+      new GuiceBundle<>(
         this,
         new GuiceHibernateModule(hibernateBundleFactory)
       )
@@ -88,7 +90,7 @@ public class ExampleApplicationHibernate extends Application<ExampleConfiguratio
   }
 
   @Override
-  public void run(ExampleConfiguration configuration, Environment environment) throws Exception {
+  public void run(ExampleConfiguration configuration, Environment environment) {
     LOGGER.info("Starting");
   }
 }

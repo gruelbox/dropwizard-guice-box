@@ -16,6 +16,8 @@
  */
 package com.gruelbox.tools.dropwizard.guice;
 
+import static com.google.common.base.Predicates.instanceOf;
+
 import java.util.Arrays;
 import java.util.Set;
 
@@ -25,9 +27,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.codahale.metrics.health.HealthCheck;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Streams;
 import com.google.common.util.concurrent.Service;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -125,6 +127,7 @@ public class GuiceBundle<T> implements ConfiguredBundle<T> {
    * @param modules     Guice modules to include when creating the injector
    *                    itself, which will occur in the run phase.
    */
+  @SuppressWarnings("WeakerAccess")
   public GuiceBundle(Application<?> application, Iterable<Module> modules) {
     this.application = application;
     this.modules = modules;
@@ -169,11 +172,13 @@ public class GuiceBundle<T> implements ConfiguredBundle<T> {
 
   @SuppressWarnings("unchecked")
   private void configureModules(T configuration) {
-    FluentIterable.from(modules).filter(Configured.class).forEach(m -> m.setConfiguration(configuration));
+    Streams.stream(modules)
+        .filter(instanceOf(Configured.class))
+        .forEach(m -> ((Configured) m).setConfiguration(configuration));
   }
 
-  @SuppressWarnings("unchecked")
-  public static <T> TypeLiteral<Set<T>> setOf(Class<T> type) {
+  @SuppressWarnings({"SameParameterValue", "unchecked"})
+  private static <T> TypeLiteral<Set<T>> setOf(Class<T> type) {
       return (TypeLiteral<Set<T>>)TypeLiteral.get(Types.setOf(type));
   }
 }

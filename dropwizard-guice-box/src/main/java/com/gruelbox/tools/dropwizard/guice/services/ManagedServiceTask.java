@@ -32,12 +32,12 @@ final class ManagedServiceTask implements Managed {
   }
 
   @Override
-  public void start() throws Exception {
+  public void start() {
     task.startAsync().awaitRunning();
   }
 
   @Override
-  public void stop() throws Exception {
+  public void stop() {
     task.stopAsync().awaitTerminated();
   }
 }

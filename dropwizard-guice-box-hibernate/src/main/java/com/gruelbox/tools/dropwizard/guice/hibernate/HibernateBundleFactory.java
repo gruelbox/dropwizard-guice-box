@@ -16,15 +16,20 @@
  */
 package com.gruelbox.tools.dropwizard.guice.hibernate;
 
+import static com.google.common.collect.Streams.stream;
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.hibernate.SessionFactory;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Streams;
 import com.google.inject.Inject;
 
 import io.dropwizard.Configuration;
@@ -84,7 +89,10 @@ public class HibernateBundleFactory<T extends Configuration> {
           List<Class<?>> entities) {
         return super.build(
           bundle, environment, dbConfig, dataSource,
-          FluentIterable.concat(entities, FluentIterable.from(additionalEntities).transformAndConcat(EntityContribution::getEntities)).toList()
+          Streams.concat(
+            entities.stream(),
+            additionalEntities.stream().flatMap(it -> stream(it.getEntities()))
+          ).collect(toList())
         );
       }
     };

@@ -33,12 +33,14 @@ import io.dropwizard.setup.Environment;
  *
  * @author Graham Crockford
  */
+@SuppressWarnings("WeakerAccess")
 public class ExampleApplicationBase extends Application<ExampleConfiguration> {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ExampleApplicationBase.class);
 
   @VisibleForTesting
-  static final String APP_NAME = "Base example";
+  @SuppressWarnings("WeakerAccess")
+  public static final String APP_NAME = "Base example";
 
   public ExampleApplicationBase() {
     // No-op
@@ -49,7 +51,7 @@ public class ExampleApplicationBase extends Application<ExampleConfiguration> {
     LOGGER.info("Initialising");
     super.initialize(bootstrap);
     bootstrap.addBundle(
-      new GuiceBundle<ExampleConfiguration>(this)
+      new GuiceBundle<>(this)
     );
   }
 
@@ -59,7 +61,7 @@ public class ExampleApplicationBase extends Application<ExampleConfiguration> {
   }
 
   @Override
-  public void run(ExampleConfiguration configuration, Environment environment) throws Exception {
+  public void run(ExampleConfiguration configuration, Environment environment) {
     LOGGER.info("Starting");
   }
 }

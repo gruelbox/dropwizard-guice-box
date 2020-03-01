@@ -32,7 +32,12 @@ class GuiceManagedEnvironment implements EnvironmentInitialiser {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GuiceManagedEnvironment.class);
 
-  @Inject private Set<Managed> managedTasks;
+  private final Set<Managed> managedTasks;
+
+  @Inject
+  GuiceManagedEnvironment(Set<Managed> managedTasks) {
+    this.managedTasks = managedTasks;
+  }
 
   @Override
   public void init(Environment environment) {

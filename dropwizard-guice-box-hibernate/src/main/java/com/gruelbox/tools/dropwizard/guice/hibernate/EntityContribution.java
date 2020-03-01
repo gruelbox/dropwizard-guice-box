@@ -27,6 +27,7 @@ import org.hibernate.SessionFactory;
  *
  * @author Graham Crockford
  */
+@SuppressWarnings("WeakerAccess")
 public interface EntityContribution {
 
   /**

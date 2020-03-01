@@ -32,7 +32,12 @@ class GuiceServicesEnvironment implements EnvironmentInitialiser {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GuiceServicesEnvironment.class);
 
-  @Inject private Set<Service> services;
+  private Set<Service> services;
+
+  @Inject
+  GuiceServicesEnvironment(Set<Service> services) {
+    this.services = services;
+  }
 
   @Override
   public void init(Environment environment) {
