@@ -16,6 +16,7 @@
  */
 package com.gruelbox.tools.dropwizard.guice.resources;
 
+import io.dropwizard.servlets.tasks.Task;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -37,17 +38,27 @@ class GuiceJerseyEnvironment implements EnvironmentInitialiser {
 
   @SuppressWarnings("rawtypes")
   private final Set<ExceptionMapper> exceptionMappers;
+  private final Set<Task> tasks;
 
   @Inject
-  GuiceJerseyEnvironment(Set<WebResource> webResources, Set<ExceptionMapper> exceptionMappers) {
+  GuiceJerseyEnvironment(Set<WebResource> webResources,
+                         Set<ExceptionMapper> exceptionMappers,
+                         Set<Task> tasks) {
     this.webResources = webResources;
     this.exceptionMappers = exceptionMappers;
+    this.tasks = tasks;
   }
 
   @Override
   public void init(Environment environment) {
-    Streams.concat(webResources.stream(), exceptionMappers.stream())
-      .peek(t -> LOGGER.debug("Registering resource {}", t))
-      .forEach(environment.jersey()::register);
+    webResources.stream()
+        .peek(t -> LOGGER.debug("Registering resource {}", t))
+        .forEach(environment.jersey()::register);
+    exceptionMappers.stream()
+        .peek(t -> LOGGER.debug("Registering exception mapper {}", t))
+        .forEach(environment.jersey()::register);
+    tasks.stream()
+        .peek(t -> LOGGER.debug("Registering task {}", t))
+        .forEach(environment.admin()::addTask);
   }
 }

@@ -16,6 +16,7 @@
  */
 package com.gruelbox.tools.dropwizard.guice.resources;
 
+import io.dropwizard.servlets.tasks.Task;
 import javax.ws.rs.ext.ExceptionMapper;
 
 import com.google.inject.AbstractModule;
@@ -27,6 +28,7 @@ public class GuiceJerseyModule extends AbstractModule {
   protected void configure() {
     Multibinder.newSetBinder(binder(), WebResource.class);
     Multibinder.newSetBinder(binder(), ExceptionMapper.class);
+    Multibinder.newSetBinder(binder(), Task.class);
     Multibinder.newSetBinder(binder(), EnvironmentInitialiser.class)
       .addBinding().to(GuiceJerseyEnvironment.class);
   }

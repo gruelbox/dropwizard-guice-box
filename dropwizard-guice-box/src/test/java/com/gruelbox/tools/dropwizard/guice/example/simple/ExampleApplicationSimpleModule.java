@@ -16,6 +16,7 @@
  */
 package com.gruelbox.tools.dropwizard.guice.example.simple;
 
+import io.dropwizard.servlets.tasks.Task;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -35,6 +36,8 @@ final class ExampleApplicationSimpleModule extends AbstractModule {
       .addBinding().to(ExampleResource.class);
     Multibinder.newSetBinder(binder(), ExceptionMapper.class)
       .addBinding().to(ExampleExceptionMapper.class);
+    Multibinder.newSetBinder(binder(), Task.class)
+        .addBinding().to(ExampleTask.class);
   }
 
   @SuppressWarnings("SameReturnValue")

@@ -19,9 +19,14 @@ package com.gruelbox.tools.dropwizard.guice.example.simple;
 import static org.junit.Assert.assertEquals;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 
@@ -30,6 +35,7 @@ import com.gruelbox.tools.dropwizard.guice.example.ExampleConfiguration;
 import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
+import org.junit.jupiter.api.BeforeAll;
 
 public class TestExampleApplicationSimple {
 
@@ -40,10 +46,20 @@ public class TestExampleApplicationSimple {
         ResourceHelpers.resourceFilePath("example-configuration.yml")
     );
 
+  private static Client client;
+
+  @BeforeClass
+  public static void before() {
+    client = new JerseyClientBuilder(RULE.getEnvironment()).build("test client");
+  }
+
+  @AfterClass
+  public static void after() {
+    client.close();
+  }
+
   @Test
   public void testResource() {
-    Client client = new JerseyClientBuilder(RULE.getEnvironment()).build("test client");
-
     assertEquals(
       ExampleApplicationSimple.APP_NAME,
       client.target(
@@ -68,8 +84,6 @@ public class TestExampleApplicationSimple {
 
   @Test
   public void testExceptionMapper() {
-    Client client = new JerseyClientBuilder(RULE.getEnvironment()).build("test client 2");
-
     assertEquals(
       Status.FORBIDDEN.getStatusCode(),
       client.target(
@@ -77,6 +91,17 @@ public class TestExampleApplicationSimple {
        .request()
        .get()
        .getStatus()
+    );
+  }
+
+  @Test
+  public void testTask() {
+    assertEquals(
+        "Foo",
+        client.target(
+            String.format("http://localhost:%d/tasks/mytask", RULE.getAdminPort()))
+            .request()
+            .post(Entity.text(""), String.class)
     );
   }
 }
