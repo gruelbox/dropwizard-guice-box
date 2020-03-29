@@ -16,19 +16,14 @@
  */
 package com.gruelbox.tools.dropwizard.guice.resources;
 
+import com.gruelbox.tools.dropwizard.guice.EnvironmentInitialiser;
 import io.dropwizard.servlets.tasks.Task;
+import io.dropwizard.setup.Environment;
 import java.util.Set;
-
 import javax.inject.Inject;
 import javax.ws.rs.ext.ExceptionMapper;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.common.collect.Streams;
-import com.gruelbox.tools.dropwizard.guice.EnvironmentInitialiser;
-
-import io.dropwizard.setup.Environment;
 
 class GuiceJerseyEnvironment implements EnvironmentInitialiser {
 
