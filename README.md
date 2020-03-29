@@ -64,6 +64,7 @@ You now have access to some Guice idiomatic bind points in your `Module`s:
 - Multibindings to `WebResource` provide resources.
 - Multibindings to `HealthCheck` provide healthchecks.
 - Multibindings to `ExceptionMapper` allow you to map exceptions from your endpoints to HTTP responses.
+- Multibindings to `Task` to provide administration tasks.
 - Multibindings to `Managed` provide controlled startup and shutdown of components.
 - Multibindings to `Service` provide controlled startup and shutdown of background processes.
 - Multibindings to `EnvironmentInitialiser` allow you to hook into the `Application.run` phase directly from anywhere in your code when you need to do anything else on startup, without having to add code to `Application.run` directly.
@@ -88,7 +89,7 @@ Add the dependency:
 <dependency>
   <groupId>com.gruelbox</groupId>
   <artifactId>dropwizard-guice-box-hibernate</artifactId>
-  <version>0.0.2</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
@@ -136,7 +137,3 @@ You now have access to both `SessionFactory` and `HibernateBundle` via injection
 ## Examples
 
 See the [tests](https://github.com/gruelbox/dropwizard-guice-box/tree/master/dropwizard-guice-box/src/test/java/com/gruelbox/tools/dropwizard/guice/example/simple) for some basic examples.
-
-## Credit
-
-The POM and Travis build borrow heavily from other projects. See [oss-archetype](https://github.com/gruelbox/oss-archetype#credit) for credits.
