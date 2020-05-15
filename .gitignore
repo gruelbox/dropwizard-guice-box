@@ -13,3 +13,6 @@ buildNumber.properties
 /.settings
 /.checkstyle
 /.fbExcludeFilterFile
+**/.flattened-pom.xml
+**/.idea
+**/*.iml

@@ -1,11 +1,7 @@
 # dropwizard-guice-box
 
 [![Build Status](https://travis-ci.org/gruelbox/dropwizard-guice-box.svg?branch=master)](https://travis-ci.org/gruelbox/dropwizard-guice-box)
-[![Sonarcloud Security Rating](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box-parent&metric=security_rating)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box-parent)
-[![Sonarcloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box-parent&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box-parent)
-[![Sonarcloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.gruelbox%3Adropwizard-guice-box-parent&metric=coverage)](https://sonarcloud.io/dashboard?id=com.gruelbox%3Adropwizard-guice-box-parent)
 [![CodeFactor](https://www.codefactor.io/repository/github/gruelbox/dropwizard-guice-box/badge)](https://www.codefactor.io/repository/github/gruelbox/dropwizard-guice-box)
-
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.gruelbox/dropwizard-guice-box/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.gruelbox/dropwizard-guice-box)
 [![Javadocs](https://www.javadoc.io/badge/com.gruelbox/dropwizard-guice-box.svg?color=blue)](https://www.javadoc.io/doc/com.gruelbox/dropwizard-guice-box)
 
@@ -13,13 +9,13 @@ A slightly different take on Guice integration with DropWizard, which makes heav
 
 ## Installation
 
-Add the dependency to your POM:
+Check the [latest release](https://github.com/gruelbox/dropwizard-guice-box/releases) and add the dependency to your POM:
 
 ```
 <dependency>
   <groupId>com.gruelbox</groupId>
   <artifactId>dropwizard-guice-box</artifactId>
-  <version>1.1.0</version>
+  <version>latest release version</version>
 </dependency>
 ```
 
