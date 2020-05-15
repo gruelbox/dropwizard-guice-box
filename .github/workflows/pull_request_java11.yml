@@ -19,6 +19,6 @@ jobs:
 
       - name: Build with Maven
         run: |
-          $revision="1.1.$GITHUB_RUN_NUMBER-${GITHUB_ACTOR}-SNAPSHOT"
+          revision="1.1.$GITHUB_RUN_NUMBER-${GITHUB_ACTOR}-SNAPSHOT"
           echo "Building $revision at $GITHUB_SHA"
           mvn -B package -Drevision="$revision"
