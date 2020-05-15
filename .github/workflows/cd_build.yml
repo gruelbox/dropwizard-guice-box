@@ -30,6 +30,8 @@ jobs:
             git tag $version
             git push origin $version
           else
+            $revision="1.1.$GITHUB_RUN_NUMBER-${GITHUB_ACTOR}-SNAPSHOT"
+            echo "Building $revision at $GITHUB_SHA" -Drevision="$revision"
             mvn -B package
           fi
         env:
