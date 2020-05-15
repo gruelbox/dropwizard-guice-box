@@ -3,7 +3,7 @@
 
   <groupId>com.gruelbox</groupId>
   <artifactId>dropwizard-guice-box-parent</artifactId>
-  <version>1.1.1-SNAPSHOT</version>
+  <version>${revision}</version>
   <packaging>pom</packaging>
 
   <name>${project.groupId}:${project.artifactId}</name>
@@ -22,6 +22,7 @@
   </modules>
 
   <properties>
+    <revision>1.1.99999-SNAPSHOT</revision>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,11 +30,6 @@
 
     <dropwizard.version>2.0.9</dropwizard.version>
     <guice.version>4.2.3</guice.version>
-
-    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-    <sonar.jacoco.reportPaths>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPaths>
-    <sonar.language>java</sonar.language>
   </properties>
 
   <dependencyManagement>
@@ -150,7 +146,6 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.2</version>
           <configuration>
-            <argLine>${surefireArgLine}</argLine>
             <excludes>
               <exclude>**/*Integration.java</exclude>
             </excludes>
@@ -233,52 +228,50 @@
           </excludes>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>com.coveo</groupId>
+        <artifactId>fmt-maven-plugin</artifactId>
+        <version>2.9</version>
+        <configuration>
+          <filesNamePattern>.*\.java</filesNamePattern>
+          <skip>false</skip>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>format</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <version>1.2.2</version>
+        <configuration>
+          <flattenMode>oss</flattenMode>
+        </configuration>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
   <profiles>
-    <profile>
-      <id>coverage-per-test</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.5</version>
-            <executions>
-              <execution>
-                <id>default-prepare-agent</id>
-                <goals>
-                  <goal>prepare-agent</goal>
-                </goals>
-                <configuration>
-                  <destFile>${sonar.jacoco.reportPaths}</destFile>
-                  <propertyName>surefireArgLine</propertyName>
-                  <append>true</append>
-                </configuration>
-              </execution>
-              <execution>
-                <id>default-report</id>
-                <goals>
-                  <goal>report</goal>
-                </goals>
-                <configuration>
-                  <dataFile>${sonar.jacoco.reportPaths}</dataFile>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-      <dependencies>
-        <dependency>
-          <groupId>org.sonarsource.java</groupId>
-          <artifactId>sonar-jacoco-listeners</artifactId>
-          <version>5.14.0.18788</version>
-          <scope>test</scope>
-        </dependency>
-      </dependencies>
-    </profile>
     <profile>
       <id>release</id>
       <properties>
@@ -317,6 +310,16 @@
           </plugin>
         </plugins>
       </build>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+      </distributionManagement>
     </profile>
   </profiles>
 
@@ -349,18 +352,10 @@
   </scm>
 
   <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
     <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <id>github</id>
+      <name>GitHub OWNER Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/gruelbox/dropwizard-guice-box</url>
     </repository>
   </distributionManagement>
-
-  <ciManagement>
-    <system>Travis CI</system>
-    <url>https://travis-ci.org/gruelbox/dropwizard-guice-box</url>
-  </ciManagement>
 </project>

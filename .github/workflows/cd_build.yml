@@ -1,0 +1,36 @@
+name: Continous Delivery
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+          settings-path: ~ # location for the settings.xml file
+
+      - name: Build, publish to GPR and tag
+        run: |
+          set -e
+          if [ "GITHUB_REPOSITORY" == "gruelbox/dropwizard-guice-box" ]; then
+            $revision="1.1.$GITHUB_RUN_NUMBER"
+            echo "Building $revision at $GITHUB_SHA"
+            mvn -B deploy -s $GITHUB_WORKSPACE/settings.xml -Drevision="$revision"
+            echo "Tagging $version"
+            git tag $version
+            git push origin $version
+          else
+            mvn -B package
+          fi
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
