@@ -18,24 +18,18 @@ package com.gruelbox.tools.dropwizard.guice.example.simple;
 
 import static org.junit.Assert.assertEquals;
 
+import com.gruelbox.tools.dropwizard.guice.example.ExampleConfiguration;
+import io.dropwizard.client.JerseyClientBuilder;
+import io.dropwizard.testing.ResourceHelpers;
+import io.dropwizard.testing.junit.DropwizardAppRule;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
-
-import com.gruelbox.tools.dropwizard.guice.example.ExampleConfiguration;
-
-import io.dropwizard.client.JerseyClientBuilder;
-import io.dropwizard.testing.ResourceHelpers;
-import io.dropwizard.testing.junit.DropwizardAppRule;
-import org.junit.jupiter.api.BeforeAll;
 
 public class TestExampleApplicationSimple {
 
