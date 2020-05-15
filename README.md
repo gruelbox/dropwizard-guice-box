@@ -1,9 +1,9 @@
 # dropwizard-guice-box
 
-[![Build Status](https://travis-ci.org/gruelbox/dropwizard-guice-box.svg?branch=master)](https://travis-ci.org/gruelbox/dropwizard-guice-box)
-[![CodeFactor](https://www.codefactor.io/repository/github/gruelbox/dropwizard-guice-box/badge)](https://www.codefactor.io/repository/github/gruelbox/dropwizard-guice-box)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.gruelbox/dropwizard-guice-box/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.gruelbox/dropwizard-guice-box)
 [![Javadocs](https://www.javadoc.io/badge/com.gruelbox/dropwizard-guice-box.svg?color=blue)](https://www.javadoc.io/doc/com.gruelbox/dropwizard-guice-box)
+[![CD](https://github.com/gruelbox/dropwizard-guice-box/workflows/Continous%20Delivery/badge.svg)](https://github.com/gruelbox/dropwizard-guice-box/actions)
+[![CodeFactor](https://www.codefactor.io/repository/github/gruelbox/dropwizard-guice-box/badge)](https://www.codefactor.io/repository/github/gruelbox/dropwizard-guice-box)
 
 A slightly different take on Guice integration with DropWizard, which makes heavy use of multibindings to create a more plugin-like, modular experience.
 
