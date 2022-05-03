@@ -28,7 +28,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <dropwizard.version>2.0.25</dropwizard.version>
+    <dropwizard.version>2.1.0</dropwizard.version>
     <guice.version>4.2.3</guice.version>
   </properties>
 
