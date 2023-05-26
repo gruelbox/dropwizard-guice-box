@@ -15,9 +15,9 @@ package com.gruelbox.tools.dropwizard.guice.services;
 
 import com.google.common.util.concurrent.Service;
 import com.gruelbox.tools.dropwizard.guice.EnvironmentInitialiser;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Environment;
+import jakarta.inject.Inject;
 import java.util.Set;
-import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +25,7 @@ class GuiceServicesEnvironment implements EnvironmentInitialiser {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(GuiceServicesEnvironment.class);
 
-  private Set<Service> services;
+  private final Set<Service> services;
 
   @Inject
   GuiceServicesEnvironment(Set<Service> services) {

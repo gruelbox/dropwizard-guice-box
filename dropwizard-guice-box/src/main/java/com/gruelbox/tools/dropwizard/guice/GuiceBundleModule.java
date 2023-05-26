@@ -19,7 +19,7 @@ import com.gruelbox.tools.dropwizard.guice.healthcheck.GuiceHealthCheckModule;
 import com.gruelbox.tools.dropwizard.guice.managed.GuiceManagedModule;
 import com.gruelbox.tools.dropwizard.guice.resources.GuiceJerseyModule;
 import com.gruelbox.tools.dropwizard.guice.services.GuiceServicesModule;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Environment;
 
 /**
  * Standard bindings for {@link GuiceBundle}.

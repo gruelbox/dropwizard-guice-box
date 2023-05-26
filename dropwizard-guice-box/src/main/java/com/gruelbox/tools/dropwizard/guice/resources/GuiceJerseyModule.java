@@ -14,15 +14,17 @@
 package com.gruelbox.tools.dropwizard.guice.resources;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.Multibinder;
 import com.gruelbox.tools.dropwizard.guice.EnvironmentInitialiser;
 import io.dropwizard.servlets.tasks.Task;
-import javax.ws.rs.ext.ExceptionMapper;
+import jakarta.ws.rs.ext.ExceptionMapper;
 
 public class GuiceJerseyModule extends AbstractModule {
   @Override
   protected void configure() {
     Multibinder.newSetBinder(binder(), WebResource.class);
+    Multibinder.newSetBinder(binder(), new TypeLiteral<ExceptionMapper<?>>() {});
     Multibinder.newSetBinder(binder(), ExceptionMapper.class);
     Multibinder.newSetBinder(binder(), Task.class);
     Multibinder.newSetBinder(binder(), EnvironmentInitialiser.class)

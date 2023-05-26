@@ -13,12 +13,13 @@
  */
 package com.gruelbox.tools.dropwizard.guice.resources;
 
+import com.google.common.collect.Sets;
 import com.gruelbox.tools.dropwizard.guice.EnvironmentInitialiser;
+import io.dropwizard.core.setup.Environment;
 import io.dropwizard.servlets.tasks.Task;
-import io.dropwizard.setup.Environment;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.ext.ExceptionMapper;
 import java.util.Set;
-import javax.inject.Inject;
-import javax.ws.rs.ext.ExceptionMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,17 +28,18 @@ class GuiceJerseyEnvironment implements EnvironmentInitialiser {
   private static final Logger LOGGER = LoggerFactory.getLogger(GuiceJerseyEnvironment.class);
 
   private final Set<WebResource> webResources;
-
-  @SuppressWarnings("rawtypes")
-  private final Set<ExceptionMapper> exceptionMappers;
-
+  private final Set<ExceptionMapper<?>> exceptionMappers;
   private final Set<Task> tasks;
 
+  @SuppressWarnings({"unchecked", "rawtypes"})
   @Inject
   GuiceJerseyEnvironment(
-      Set<WebResource> webResources, Set<ExceptionMapper> exceptionMappers, Set<Task> tasks) {
+      Set<WebResource> webResources,
+      Set<ExceptionMapper<?>> exceptionMappers,
+      Set<ExceptionMapper> exceptionMappersRaw,
+      Set<Task> tasks) {
     this.webResources = webResources;
-    this.exceptionMappers = exceptionMappers;
+    this.exceptionMappers = Sets.union(exceptionMappers, (Set) exceptionMappersRaw);
     this.tasks = tasks;
   }
 

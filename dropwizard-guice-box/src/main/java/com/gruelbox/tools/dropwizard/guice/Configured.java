@@ -15,16 +15,16 @@ package com.gruelbox.tools.dropwizard.guice;
 
 import com.google.inject.Module;
 import com.gruelbox.tools.dropwizard.guice.resources.WebResource;
-import io.dropwizard.Application;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.Application;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.core.setup.Environment;
 
 /**
  * Any Guice {@link Module} directly provided to {@link GuiceBundle} during the {@link
- * Application#initialize(io.dropwizard.setup.Bootstrap)} phase of startup which supports this
+ * Application#initialize(io.dropwizard.core.setup.Bootstrap)} phase of startup which supports this
  * interface will be called back during the {@link Application#run(io.dropwizard.Configuration,
- * io.dropwizard.setup.Environment)} phase, but prior to creation of the injector, to provide it
- * with the configuration.
+ * io.dropwizard.core.setup.Environment)} phase, but prior to creation of the injector, to provide
+ * it with the configuration.
  *
  * <p>Note that this should <em>only</em> be used where conditional bindings are required - for
  * example where you only want to make certain {@link WebResource}s available, depending on

@@ -13,37 +13,38 @@
  */
 package com.gruelbox.tools.dropwizard.guice.example.simple;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.gruelbox.tools.dropwizard.guice.example.ExampleConfiguration;
 import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.testing.ResourceHelpers;
-import io.dropwizard.testing.junit.DropwizardAppRule;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Test;
+import io.dropwizard.testing.junit5.DropwizardAppExtension;
+import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@ExtendWith(DropwizardExtensionsSupport.class)
 public class TestExampleApplicationSimple {
 
-  @ClassRule
-  public static final DropwizardAppRule<ExampleConfiguration> RULE =
-      new DropwizardAppRule<>(
+  private static final DropwizardAppExtension<ExampleConfiguration> RULE =
+      new DropwizardAppExtension<>(
           ExampleApplicationSimple.class,
           ResourceHelpers.resourceFilePath("example-configuration.yml"));
 
   private static Client client;
 
-  @BeforeClass
+  @BeforeAll
   public static void before() {
     client = new JerseyClientBuilder(RULE.getEnvironment()).build("test client");
   }
 
-  @AfterClass
+  @AfterAll
   public static void after() {
     client.close();
   }

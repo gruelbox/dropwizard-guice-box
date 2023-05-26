@@ -15,9 +15,9 @@ package com.gruelbox.tools.dropwizard.guice.healthcheck;
 
 import com.codahale.metrics.health.HealthCheck;
 import com.gruelbox.tools.dropwizard.guice.EnvironmentInitialiser;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Environment;
+import jakarta.inject.Inject;
 import java.util.Set;
-import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

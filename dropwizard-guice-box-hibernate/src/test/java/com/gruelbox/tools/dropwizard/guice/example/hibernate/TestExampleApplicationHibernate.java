@@ -14,9 +14,10 @@
 package com.gruelbox.tools.dropwizard.guice.example.hibernate;
 
 import io.dropwizard.testing.ResourceHelpers;
-import io.dropwizard.testing.junit.DropwizardAppRule;
-import org.junit.ClassRule;
-import org.junit.Test;
+import io.dropwizard.testing.junit5.DropwizardAppExtension;
+import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,14 +27,14 @@ import org.slf4j.LoggerFactory;
  *
  * @author Graham Crockford
  */
+@ExtendWith(DropwizardExtensionsSupport.class)
 public class TestExampleApplicationHibernate {
 
   private static final Logger LOGGER =
       LoggerFactory.getLogger(TestExampleApplicationHibernate.class);
 
-  @ClassRule
-  public static final DropwizardAppRule<ExampleConfiguration> RULE =
-      new DropwizardAppRule<>(
+  private static final DropwizardAppExtension<ExampleConfiguration> RULE =
+      new DropwizardAppExtension<>(
           ExampleApplicationHibernate.class,
           ResourceHelpers.resourceFilePath("example-configuration.yml"));
 
