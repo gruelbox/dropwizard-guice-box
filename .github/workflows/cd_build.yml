@@ -23,7 +23,7 @@ jobs:
         run: |
           set -e
           if [ "$GITHUB_REPOSITORY" == "gruelbox/dropwizard-guice-box" ]; then
-            revision="1.1.$GITHUB_RUN_NUMBER"
+            revision="2.1.$GITHUB_RUN_NUMBER"
             echo "Building $revision at $GITHUB_SHA"
             mvn -B deploy -s $GITHUB_WORKSPACE/settings.xml -Drevision="$revision"
             echo "Tagging $revisionn"
