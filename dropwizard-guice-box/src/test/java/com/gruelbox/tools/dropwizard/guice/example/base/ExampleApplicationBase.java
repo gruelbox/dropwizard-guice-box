@@ -16,9 +16,9 @@ package com.gruelbox.tools.dropwizard.guice.example.base;
 import com.google.common.annotations.VisibleForTesting;
 import com.gruelbox.tools.dropwizard.guice.GuiceBundle;
 import com.gruelbox.tools.dropwizard.guice.example.ExampleConfiguration;
-import io.dropwizard.Application;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.Application;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.core.setup.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

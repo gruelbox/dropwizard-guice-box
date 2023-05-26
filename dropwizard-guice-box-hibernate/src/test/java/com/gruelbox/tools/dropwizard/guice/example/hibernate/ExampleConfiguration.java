@@ -14,7 +14,7 @@
 package com.gruelbox.tools.dropwizard.guice.example.hibernate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Configuration;
 
 @SuppressWarnings("WeakerAccess")
 public class ExampleConfiguration extends Configuration {

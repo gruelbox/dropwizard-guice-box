@@ -14,10 +14,10 @@
 package com.gruelbox.tools.dropwizard.guice.managed;
 
 import com.gruelbox.tools.dropwizard.guice.EnvironmentInitialiser;
+import io.dropwizard.core.setup.Environment;
 import io.dropwizard.lifecycle.Managed;
-import io.dropwizard.setup.Environment;
+import jakarta.inject.Inject;
 import java.util.Set;
-import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

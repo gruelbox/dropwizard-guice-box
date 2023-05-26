@@ -15,7 +15,7 @@ package com.gruelbox.tools.dropwizard.guice.example.simple.submodule;
 
 import com.google.inject.Inject;
 import com.gruelbox.tools.dropwizard.guice.EnvironmentInitialiser;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Environment;
 
 class SubmoduleEnvironment implements EnvironmentInitialiser {
 

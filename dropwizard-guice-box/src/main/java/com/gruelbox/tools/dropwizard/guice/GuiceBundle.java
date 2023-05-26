@@ -28,14 +28,14 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.servlet.GuiceFilter;
 import com.google.inject.util.Types;
 import com.gruelbox.tools.dropwizard.guice.resources.WebResource;
-import io.dropwizard.Application;
-import io.dropwizard.ConfiguredBundle;
+import io.dropwizard.core.Application;
+import io.dropwizard.core.ConfiguredBundle;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.core.setup.Environment;
 import io.dropwizard.lifecycle.Managed;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import jakarta.inject.Inject;
 import java.util.Arrays;
 import java.util.Set;
-import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,8 +73,8 @@ import org.slf4j.LoggerFactory;
  *   <li>Multibindings to {@link Service} provide controlled startup and shutdown of background
  *       processes.
  *   <li>Multibindings to {@link EnvironmentInitialiser} allow you to hook into the {@link
- *       Application#run(io.dropwizard.Configuration, Environment)} phase directly from anywhere in
- *       your code when you need to do anything else on startup.
+ *       Application#run(io.dropwizard.core.Configuration, Environment)} phase directly from
+ *       anywhere in your code when you need to do anything else on startup.
  * </ul>
  *
  * @author Graham Crockford
@@ -92,7 +92,7 @@ public class GuiceBundle<T> implements ConfiguredBundle<T> {
    *
    * @param application The {@link Application} itself. Any fields or methods annotated with {@link
    *     Inject} will be populated at the start of the {@link
-   *     Application#run(io.dropwizard.Configuration, Environment)} phase, prior to the {@code
+   *     Application#run(io.dropwizard.core.Configuration, Environment)} phase, prior to the {@code
    *     Application}'s own {@code run}} method.
    * @param modules Guice modules to include when creating the injector itself, which will occur in
    *     the run phase.
@@ -106,7 +106,7 @@ public class GuiceBundle<T> implements ConfiguredBundle<T> {
    *
    * @param application The {@link Application} itself. Any fields or methods annotated with {@link
    *     Inject} will be populated at the start of the {@link
-   *     Application#run(io.dropwizard.Configuration, Environment)} phase, prior to the {@code
+   *     Application#run(io.dropwizard.core.Configuration, Environment)} phase, prior to the {@code
    *     Application}'s own {@code run}} method.
    * @param modules Guice modules to include when creating the injector itself, which will occur in
    *     the run phase.

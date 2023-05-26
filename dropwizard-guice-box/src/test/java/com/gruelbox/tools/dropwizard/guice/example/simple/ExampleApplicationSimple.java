@@ -13,17 +13,17 @@
  */
 package com.gruelbox.tools.dropwizard.guice.example.simple;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.gruelbox.tools.dropwizard.guice.GuiceBundle;
 import com.gruelbox.tools.dropwizard.guice.example.ExampleConfiguration;
 import com.gruelbox.tools.dropwizard.guice.resources.WebResource;
-import io.dropwizard.Application;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
-import javax.inject.Inject;
-import javax.inject.Named;
+import io.dropwizard.core.Application;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.core.setup.Environment;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

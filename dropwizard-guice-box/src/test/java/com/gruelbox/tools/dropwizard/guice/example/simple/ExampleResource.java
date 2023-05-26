@@ -16,13 +16,13 @@ package com.gruelbox.tools.dropwizard.guice.example.simple;
 import com.codahale.metrics.annotation.Timed;
 import com.gruelbox.tools.dropwizard.guice.example.ExampleConfiguration;
 import com.gruelbox.tools.dropwizard.guice.resources.WebResource;
-import io.dropwizard.setup.Environment;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import io.dropwizard.core.setup.Environment;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 @Path("/example")
 @Singleton

@@ -19,9 +19,9 @@ import com.google.inject.multibindings.Multibinder;
 import com.gruelbox.tools.dropwizard.guice.example.simple.submodule.Submodule;
 import com.gruelbox.tools.dropwizard.guice.resources.WebResource;
 import io.dropwizard.servlets.tasks.Task;
-import javax.inject.Named;
-import javax.inject.Singleton;
-import javax.ws.rs.ext.ExceptionMapper;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
+import jakarta.ws.rs.ext.ExceptionMapper;
 
 final class ExampleApplicationSimpleModule extends AbstractModule {
   @Override

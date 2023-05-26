@@ -13,7 +13,7 @@
  */
 package com.gruelbox.tools.dropwizard.guice.hibernate;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 import org.hibernate.SessionFactory;
 
 /**

@@ -13,12 +13,13 @@
  */
 package com.gruelbox.tools.dropwizard.guice;
 
-import io.dropwizard.Application;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.Application;
+import io.dropwizard.core.setup.Environment;
 
 /**
  * Multi-bind classes implementing this interface to access the {@link Environment} during the
- * {@link Application#run(io.dropwizard.Configuration, Environment)} phase of application startup.
+ * {@link Application#run(io.dropwizard.core.Configuration, Environment)} phase of application
+ * startup.
  *
  * <p>You may inject the application configuration if you need it. The {@link Environment} is also
  * available for injection, but is provided here for convenience and historical reasons.
